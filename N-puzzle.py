@@ -72,19 +72,20 @@ def sum_of_inverse_permutations(dim, grid, target):
     return count   
 
 def getSequenceInfo(dim, grid):
-    count = 0
+    count = -1
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
-    current = (tiles_out_of_place(dim, grid, target), 0, [], grid)
+    current = (sum_of_inverse_permutations(dim, grid, target), 0, [], grid)
     stateTree = [current]
     heapify(stateTree)
     while(not current [-1] == target):
         current = heappop(stateTree)
-        count += 1
         for state in getNextStates(dim, current [-1]):
-            heappush(stateTree, (tiles_out_of_place(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
+            heappush(stateTree, (sum_of_inverse_permutations(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
+            count += 1
     print ("numero de nodos")
     print (count)
     return current[1], current[2]
+
 
 
 if (__name__ == '__main__'):
