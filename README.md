@@ -12,12 +12,12 @@ hˆ3(n) = The sum of inverse permutations
 python N-puzzle.py inside the directory of the file. Then introduce the size of the board you want to work with. And last introduce the elements of the board.
 
 
-  H1 | H2 | H3 |  
+  | H1 | H2 | H3 |  
  :---: | :---: | :---: 
- |  32.86 seconds | 0.571 seconds | 37.68 seconds
- |  30.95 seconds | 0.65 seconds | 38.37 seconds
-For 0 3 8 4 1 7 2 6 5 |  32.92 seconds | 0.54 seconds | 35.056 seconds
- |  38.819 seconds | 0.836 seconds | 36.799 seconds
- | 27.2313 seconds | 0.52262 seconds | 36.75 seconds
- | 30.14 seconds | 0.78 seconds |36.34 seconds
+ ||  32.86 seconds | 0.571 seconds | 37.68 seconds
+ ||  30.95 seconds | 0.65 seconds | 38.37 seconds
+|For 0 3 8 4 1 7 2 6 5 |  32.92 seconds | 0.54 seconds | 35.056 seconds
+ ||  38.819 seconds | 0.836 seconds | 36.799 seconds
+ || 27.2313 seconds | 0.52262 seconds | 36.75 seconds
+ || 30.14 seconds | 0.78 seconds |36.34 seconds
 
