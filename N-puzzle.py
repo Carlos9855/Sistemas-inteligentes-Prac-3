@@ -149,7 +149,7 @@ if (__name__ == '__main__'):
             print (seqCount)
             print()
         if option == '3':
-            print("- Sum of inverse permutations -")
+            print("- Sum of inverse permutations - ")
             seqCount, sequence = getSequenceInfo3 (dim, grid)
             print (seqCount)
             print()
