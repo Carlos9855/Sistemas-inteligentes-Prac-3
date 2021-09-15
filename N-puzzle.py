@@ -57,6 +57,20 @@ def getNextStates (dim, current):
         nextStates.append (('DOWN', d, (empty[0] + 1, empty [1])))
     return nextStates
 
+def sum_of_inverse_permutations(dim, grid, target):
+    count = 0
+    aux=0
+    vector = []
+    for i in range(dim):
+        for j in range(dim):
+            vector.append(grid[i][j])
+            aux += 1
+    for i in vector:
+        for j in range(i,len(vector)):
+            if(vector[i] > vector[j]):
+                count += 1
+    return count   
+
 def getSequenceInfo(dim, grid):
     count = 0
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
