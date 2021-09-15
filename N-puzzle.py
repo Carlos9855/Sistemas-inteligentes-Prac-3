@@ -1,3 +1,5 @@
+import time
+
 from heapq import heapify, heappush, heappop;
 
 def hamming (dim, grid, target):
@@ -74,7 +76,8 @@ def sum_of_inverse_permutations(dim, grid, target):
 def getSequenceInfo(dim, grid):
     count = -1
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
-    current = (sum_of_inverse_permutations(dim, grid, target), 0, [], grid)
+    initialTime = time.time()
+    current = (tiles_out_of_place(dim, grid, target), 0, [], grid)
     stateTree = [current]
     heapify(stateTree)
     while(not current [-1] == target):
@@ -82,6 +85,8 @@ def getSequenceInfo(dim, grid):
         for state in getNextStates(dim, current [-1]):
             heappush(stateTree, (tiles_out_of_place(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
+    finalTime = time.time()
+    print("Total search time elapsed: " + str(finalTime - initialTime)+" seconds")
     print ("numero de nodos")
     print (count)
     return current[1], current[2]
@@ -89,6 +94,7 @@ def getSequenceInfo(dim, grid):
 def getSequenceInfo2(dim, grid):
     count = -1
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
+    initialTime = time.time()
     current = (manhattan(dim, grid, target), 0, [], grid)
     stateTree = [current]
     heapify(stateTree)
@@ -97,6 +103,8 @@ def getSequenceInfo2(dim, grid):
         for state in getNextStates(dim, current [-1]):
             heappush(stateTree, (manhattan(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
+    finalTime = time.time()
+    print("Total search time elapsed: " + str(finalTime - initialTime)+" seconds")
     print ("numero de nodos")
     print (count)
     return current[1], current[2]
@@ -104,6 +112,7 @@ def getSequenceInfo2(dim, grid):
 def getSequenceInfo3(dim, grid):
     count = -1
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
+    initialTime = time.time()
     current = (sum_of_inverse_permutations(dim, grid, target), 0, [], grid)
     stateTree = [current]
     heapify(stateTree)
@@ -112,6 +121,8 @@ def getSequenceInfo3(dim, grid):
         for state in getNextStates(dim, current [-1]):
             heappush(stateTree, (sum_of_inverse_permutations(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
+    finalTime = time.time()
+    print("Total search time elapsed: " + str(finalTime - initialTime)+" seconds")
     print ("numero de nodos")
     print (count)
     return current[1], current[2]
@@ -133,10 +144,11 @@ if (__name__ == '__main__'):
             row += 1
             numCount = 0
     option = 0
-    while(option != 4):
+    while(option != 5):
         print("1. Use the number of tiles out of place")
         print("2. Use the Manhattan distance")
         print("3. Use the sum of inverse permutations")
+        print("4. Use all the heuristics")
         option = input()
         if option == '1':
             print("- Tiles out of place -")
@@ -153,4 +165,16 @@ if (__name__ == '__main__'):
             seqCount, sequence = getSequenceInfo3 (dim, grid)
             print (seqCount)
             print()
+        if option == '4':
+            print("- Tiles out of place -")
+            seqCount, sequence = getSequenceInfo (dim, grid)
+            print (seqCount)
+
+            print("- Manhattan Distance -")
+            seqCount, sequence = getSequenceInfo2 (dim, grid)
+            print (seqCount)
+
+            print("- Sum of inverse permutations - ")
+            seqCount, sequence = getSequenceInfo3 (dim, grid)
+            print (seqCount)
     #print ('\n'.join (sequence))
