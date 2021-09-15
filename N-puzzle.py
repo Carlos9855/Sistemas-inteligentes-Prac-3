@@ -10,6 +10,14 @@ def tiles_out_of_place(dim, grid, target):
                 counter += 1
     return counter
 
+def tiles_out_of_place(dim, grid, target):
+    counter = 0
+    for i in range (dim):
+        for j in range (dim):
+            if (grid [i][j] != target [i][j]):
+                counter += 1
+    return counter
+
 def manhattan (dim, grid, target):
     result = 0
     for i in range (dim):
@@ -121,6 +129,7 @@ def getSequenceInfo3(dim, grid):
     print ("numero de nodos" + str(count))
     print ("espacio de memoria: "+ str(((nodeSize* count)/1024)/1024)+" MB")
     return current[1], current[2]
+
 
 if (__name__ == '__main__'):
     print("Enter the size of the puzzle: ")
