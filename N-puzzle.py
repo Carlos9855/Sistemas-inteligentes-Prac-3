@@ -80,7 +80,6 @@ def getSequenceInfo(dim, grid):
     while(not current [-1] == target):
         current = heappop(stateTree)
         for state in getNextStates(dim, current [-1]):
-<<<<<<< HEAD
             heappush(stateTree, (tiles_out_of_place(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     print ("numero de nodos")
@@ -111,8 +110,6 @@ def getSequenceInfo3(dim, grid):
     while(not current [-1] == target):
         current = heappop(stateTree)
         for state in getNextStates(dim, current [-1]):
-=======
->>>>>>> e94ee75790f9c044bd50326dd438ff1ccf305ffd
             heappush(stateTree, (sum_of_inverse_permutations(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     print ("numero de nodos")
