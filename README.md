@@ -11,9 +11,8 @@ hˆ3(n) = The sum of inverse permutations
 ## Running the script
 python N-puzzle.py inside the directory of the file. Then introduce the size of the board you want to work with. And last introduce the elements of the board.
 
-With BFS:
 
- | H1 | H2 | H3  
+  H1 | H2 | H3 |  
  :---: | :---: | :---: | :---:
  |  32.86 seconds | 0.571 seconds | 37.68 seconds
  |  30.95 seconds | 0.65 seconds | 38.37 seconds
