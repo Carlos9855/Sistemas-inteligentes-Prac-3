@@ -8,6 +8,14 @@ def hamming (dim, grid, target):
                 counter += 1
     return counter
 
+def tiles_out_of_place(dim, grid, target):
+    counter = 0
+    for i in range (dim):
+        for j in range (dim):
+            if (grid [i][j] != target [i][j]):
+                counter += 1
+    return counter
+
 def manhattan (dim, grid, target):
     result = 0
     for i in range (dim):
@@ -52,15 +60,15 @@ def getNextStates (dim, current):
 def getSequenceInfo(dim, grid):
     count = 0
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
-    current = (manhattan(dim, grid, target), 0, [], grid)
+    current = (tiles_out_of_place(dim, grid, target), 0, [], grid)
     stateTree = [current]
     heapify(stateTree)
     while(not current [-1] == target):
         current = heappop(stateTree)
         count += 1
         for state in getNextStates(dim, current [-1]):
-            heappush(stateTree, (manhattan(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
-
+            heappush(stateTree, (tiles_out_of_place(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
+    print ("numero de nodos")
     print (count)
     return current[1], current[2]
 
