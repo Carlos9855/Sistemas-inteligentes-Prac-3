@@ -1,14 +1,7 @@
 import time
 import  sys
+import random
 from heapq import heapify, heappush, heappop;
-
-def tiles_out_of_place(dim, grid, target):
-    counter = 0
-    for i in range (dim):
-        for j in range (dim):
-            if (grid [i][j] != target [i][j]):
-                counter += 1
-    return counter
 
 def tiles_out_of_place(dim, grid, target):
     counter = 0
@@ -30,6 +23,28 @@ def manhattan (dim, grid, target):
                         result += (abs (m - j) + abs (l - i))
                         break
     return result
+
+def sum_of_inverse_permutations(dim, grid, target):
+    count = 0
+    aux=0
+    vector = []
+    for i in range(dim):
+        for j in range(dim):
+            vector.append(grid[i][j])
+            aux += 1
+    for i in vector:
+        for j in range(i,len(vector)):
+            if(vector[i] > vector[j]):
+                count += 1
+    return count 
+
+def poroto(dim, grid, target):
+    counter = 0
+    for i in range (dim):
+        for j in range (dim):
+            if (grid [i][j] == target [i][j]):
+                counter += random.randint(0, 1)
+    return counter
 
 def getNextStates (dim, current):
     nextStates = []
@@ -59,32 +74,18 @@ def getNextStates (dim, current):
         nextStates.append (('DOWN', d, (empty[0] + 1, empty [1])))
     return nextStates
 
-def sum_of_inverse_permutations(dim, grid, target):
-    count = 0
-    aux=0
-    vector = []
-    for i in range(dim):
-        for j in range(dim):
-            vector.append(grid[i][j])
-            aux += 1
-    for i in vector:
-        for j in range(i,len(vector)):
-            if(vector[i] > vector[j]):
-                count += 1
-    return count   
-
 def getSequenceInfo(dim, grid):
     count = -1
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
     nodeSize = sys.getsizeof(grid)
     initialTime = time.time()
-    current = (tiles_out_of_place(dim, grid, target), 0, [], grid)
+    current = (poroto(dim, grid, target), 0, [], grid)
     stateTree = [current]
     heapify(stateTree)
     while(not current [-1] == target):
         current = heappop(stateTree)
         for state in getNextStates(dim, current [-1]):
-            heappush(stateTree, (tiles_out_of_place(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
+            heappush(stateTree, (poroto(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     finalTime = time.time()
     print("Total search time elapsed: " + str(finalTime - initialTime)+" seconds")
