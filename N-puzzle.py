@@ -88,9 +88,9 @@ def getSequenceInfo(dim, grid):
             heappush(stateTree, (poroto(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     finalTime = time.time()
-    print("Total search time elapsed: " + str(finalTime - initialTime)+" seconds")
-    print ("numero de nodos" + str(count))
-    print ("espacio de memoria: "+ str(((nodeSize* count)/1024)/1024)+" MB")
+    print("Total search time elapsed : " + str(finalTime - initialTime)+" seconds")
+    print ("Number of nodes :" + str(count))
+    print ("Use of memory : "+ str(((nodeSize* count)/1024)/1024)+" MB")
     return current[1], current[2]
 
 def getSequenceInfo2(dim, grid):
@@ -107,9 +107,9 @@ def getSequenceInfo2(dim, grid):
             heappush(stateTree, (manhattan(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     finalTime = time.time()
-    print("Total search time elapsed: " + str(finalTime - initialTime)+" seconds")
-    print ("numero de nodos" + str(count))
-    print ("espacio de memoria: "+ str(((nodeSize* count)/1024)/1024)+" MB")
+    print("Total search time elapsed : " + str(finalTime - initialTime)+" seconds")
+    print ("Number of nodes :" + str(count))
+    print ("Use of memory : "+ str(((nodeSize* count)/1024)/1024)+" MB")
     return current[1], current[2]
 
 def getSequenceInfo3(dim, grid):
@@ -126,9 +126,9 @@ def getSequenceInfo3(dim, grid):
             heappush(stateTree, (sum_of_inverse_permutations(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     finalTime = time.time()
-    print("Total search time elapsed: " + str(finalTime - initialTime)+" seconds")
-    print ("numero de nodos" + str(count))
-    print ("espacio de memoria: "+ str(((nodeSize* count)/1024)/1024)+" MB")
+    print("Total search time elapsed :" + str(finalTime - initialTime)+" seconds")
+    print ("Number of nodes :" + str(count))
+    print ("Use of memory : "+ str(((nodeSize* count)/1024)/1024)+" MB")
     return current[1], current[2]
 
 
@@ -176,4 +176,4 @@ if (__name__ == '__main__'):
             print (seqCount)
             print("- Sum of inverse permutations - ")
             seqCount, sequence = getSequenceInfo3 (dim, grid)
-            print ("step: "+ str(seqCount))
+            print ("Step: "+ str(seqCount))
