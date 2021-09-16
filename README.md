@@ -12,6 +12,11 @@ hˆ3(n) = The sum of inverse permutations
 python N-puzzle.py inside the directory of the file. Then introduce the size of the board you want to work with. And last introduce the elements of the board.
 
 
+## EXPERIMENTS
+On the part of experiments first we are taking one combination 
+and we are solving it with all the heuristic functions to 
+compare the time that takes to every function. At the bottom we 
+are calculating the average of every function.
   || H1 | H2 | H3 |  
  :---: | :---: | :---: | :---:  
  ||  32.86 seconds | 0.571 seconds | 37.68 seconds
@@ -19,5 +24,91 @@ python N-puzzle.py inside the directory of the file. Then introduce the size of 
 |For 0 3 8 4 1 7 2 6 5|  32.92 seconds | 0.54 seconds | 35.056 seconds
  ||  38.819 seconds | 0.836 seconds | 36.799 seconds
  || 27.2313 seconds | 0.52262 seconds | 36.75 seconds
- || 30.14 seconds | 0.78 seconds |36.34 seconds
+ |Average| 30.14 seconds | 0.78 seconds |36.34 seconds
 
+On the second part of experiments we are taking more 
+combinations and we are comparing the time and the memory that 
+every function has. We are processing the combinations through
+levels so that the first one should be the easiest and the last
+one the hardest to solve.
+
+
+# Tiles out of place
+Tiles out of place. For this heuristic we are counting the
+spaces in the board that are out place by comparing the actual
+state with the goal state and then we get the sum of every
+one that is not in place, after that we compare the sums and 
+decide which one is the lowest, once we get it we expand 
+that node and so on. If two states match at the sum of the
+out of place tiles we select one randomly.
+
+||Initial State | Time (seconds) | Memory (MB)
+|:---: | :---: | :---: | :---:
+||0 2 3 1 4 5 6 7 8 | 0.222446203231811 | 1.37038421630859
+||0 2 4 1 3 8 6 7 5 | 1.42226362228393 | 15.0011291503906
+||0 3 8 4 1 7 2 6 5 | 36.9328112602233 | 238.096641540527
+||4 2 0 8 3 5 7 6 1 | 58.2836725711822 | 465.806007385253
+||6 4 1 0 2 3 8 5 7 | 104.866127729415 | 821.302085876464
+
+# Manhattan Distance
+Manhattan distante. In this heuristic we are comparing the 
+distance between one tile in the actual state and the same 
+tile on the goal state. Once we get the numbers we make a sum 
+of every one. Then we compare the those numbers and expand the 
+lowest one.
+||Initial State | Time (seconds) | Memory (MB)
+|:---: | :---: | :---: | :---:
+||0 2 3 1 4 5 6 7 8 | 0.0339031219482421 | 0.114471435546875
+||0 2 4 1 3 8 6 7 5 | 0.837672472000122 | 3.501953125
+||0 3 8 4 1 7 2 6 5 | 1.31654977798461 | 2.39399719238281
+||4 2 0 8 3 5 7 6 1 | 1.01377058029174 | 4.15076446533203
+||6 4 1 0 2 3 8 5 7 | 1.27330470085144 | 5.37344360351562
+
+# Sum of Inverse Permutations
+ Inverse permutations. For this heuristic we have the actual 
+ combination on a list and going through every element we 
+ compare it to the ones ahead and if the element ahead is 
+ lower we add it to the a counter. Then we repeat the comparing 
+ process with all the elements of the list and after that we 
+ make a sum with all the counters. Then we get the number and 
+ choose the lowest one and that is the node we expand.
+||Initial State | Time (seconds) | Memory (MB)
+|:---: | :---: | :---: | :---:
+||0 2 3 1 4 5 6 7 8 | 1.00835633277893 | 6.0256118774414
+||0 2 4 1 3 8 6 7 5 | 118.148568868637 | 434.005943298339
+||0 3 8 4 1 7 2 6 5 | 50.3002603054046 | 194.452728271484
+||4 2 0 8 3 5 7 6 1 | 11.6959052085876 | 77.3878936767578
+||6 4 1 0 2 3 8 5 7 | 342.6548941      | 1354.87213742
+
+# With which heuristic does A∗ use more memory?
+The heuristic of A* that occupies more memory is that of the
+summation of the inverse permutations, it could be observed 
+that the heuristic in some cases was faster than the heuristic
+hˆ1(n) and in others not but something that called our
+attention was that it occupied a great amount of memory,
+and in terms of performance it is not the best since more 
+powerful computers would be needed.
+
+# With which heuristic A∗ find the solution faster?
+The heuristic that found the target solution the fastest was
+the manhattan function since all the tests performed were 
+solved in less than two seconds and it also took less memory.
+
+# A* is or is not optimal using hˆ1(n), hˆ2(n), hˆ3(n)?
+According to the experiments carried out, the only heuristic
+function that is optimal is the manhattan function since it has 
+a better execution time and more optimal memory management due 
+to the fact that it uses the shortest and most optimal path to 
+the objective function.
+
+# Conclusions
+In this practice we had to test three different heuristic 
+functions and analyze their advantages and disadvantages, we 
+could also observe that there is a big difference between them
+ since one was optimal and gave us a low execution time, the 
+ other functions were the opposite, giving us execution times 
+ and memory reservation higher than expected.
+So we came to the conclusion that the most optimal heuristic 
+is the manhattan distance.
+
+# Recommendations
