@@ -46,7 +46,7 @@ def poroto(dim, grid, target):
                 counter += random.randint(0, 1)
     return counter
 
-def getNextStates (dim, current):
+def get_next_states (dim, current):
     nextStates = []
     empty = None
     for i in range (dim):
@@ -74,7 +74,7 @@ def getNextStates (dim, current):
         nextStates.append (('DOWN', d, (empty[0] + 1, empty [1])))
     return nextStates
 
-def getSequenceInfo(dim, grid):
+def get_sequence_info_TOP(dim, grid):
     count = -1
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
     nodeSize = sys.getsizeof(grid)
@@ -84,16 +84,16 @@ def getSequenceInfo(dim, grid):
     heapify(stateTree)
     while(not current [-1] == target):
         current = heappop(stateTree)
-        for state in getNextStates(dim, current [-1]):
-            heappush(stateTree, (poroto(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
+        for state in get_next_states(dim, current [-1]):
+            heappush(stateTree, (tiles_out_of_place(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     finalTime = time.time()
     print("Total search time elapsed : " + str(finalTime - initialTime)+" seconds")
-    print ("Number of nodes :" + str(count))
-    print ("Use of memory : "+ str(((nodeSize* count)/1024)/1024)+" MB")
+    print("Number of nodes :" + str(count))
+    print("Use of memory : "+ str(((nodeSize* count)/1024)/1024)+" MB")
     return current[1], current[2]
 
-def getSequenceInfo2(dim, grid):
+def getSequenceInfoM(dim, grid):
     count = -1
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
     nodeSize = sys.getsizeof(grid)
@@ -103,7 +103,7 @@ def getSequenceInfo2(dim, grid):
     heapify(stateTree)
     while(not current [-1] == target):
         current = heappop(stateTree)
-        for state in getNextStates(dim, current [-1]):
+        for state in get_next_states(dim, current [-1]):
             heappush(stateTree, (manhattan(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     finalTime = time.time()
@@ -112,7 +112,7 @@ def getSequenceInfo2(dim, grid):
     print ("Use of memory : "+ str(((nodeSize* count)/1024)/1024)+" MB")
     return current[1], current[2]
 
-def getSequenceInfo3(dim, grid):
+def get_sequence_info_sum_inverse(dim, grid):
     count = -1
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
     nodeSize = sys.getsizeof(grid)
@@ -122,7 +122,7 @@ def getSequenceInfo3(dim, grid):
     heapify(stateTree)
     while(not current [-1] == target):
         current = heappop(stateTree)
-        for state in getNextStates(dim, current [-1]):
+        for state in get_next_states(dim, current [-1]):
             heappush(stateTree, (sum_of_inverse_permutations(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     finalTime = time.time()
@@ -154,26 +154,26 @@ if (__name__ == '__main__'):
         option = input()
         if option == '1':
             print("- Tiles out of place -")
-            seqCount, sequence = getSequenceInfo (dim, grid)
+            seqCount, sequence = get_sequence_info_TOP (dim, grid)
             print (seqCount)
             print()
         if option == '2':
             print("- Manhattan Distance -")
-            seqCount, sequence = getSequenceInfo2 (dim, grid)
+            seqCount, sequence = getSequenceInfoM (dim, grid)
             print (seqCount)
             print()
         if option == '3':
             print("- Sum of inverse permutations - ")
-            seqCount, sequence = getSequenceInfo3 (dim, grid)
+            seqCount, sequence = get_sequence_info_sum_inverse (dim, grid)
             print (seqCount)
             print()
         if option == '4':
             print("- Tiles out of place -")
-            seqCount, sequence = getSequenceInfo (dim, grid)
+            seqCount, sequence = get_sequence_info_TOP (dim, grid)
             print (seqCount)
             print("- Manhattan Distance -")
-            seqCount, sequence = getSequenceInfo2 (dim, grid)
+            seqCount, sequence = getSequenceInfoM (dim, grid)
             print (seqCount)
             print("- Sum of inverse permutations - ")
-            seqCount, sequence = getSequenceInfo3 (dim, grid)
+            seqCount, sequence = get_sequence_info_sum_inverse (dim, grid)
             print ("Step: "+ str(seqCount))

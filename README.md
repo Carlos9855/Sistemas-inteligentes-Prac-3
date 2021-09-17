@@ -1,9 +1,9 @@
 # Sistemas-inteligentes-Prac-3
 ## Problem Description
-We have the (n^2 - 1)-puzzle, a puzzle that consists on having a board with numbers and the numbers are not in order. So that we want to implement a computer program that helps us to get the numbers in order.
+We have the (n^2 - 1)-puzzle, a puzzle that consists on having a board with numbers were these are not in order. For this reason, a computer program has been implemented which helps to order the numbers.
 ## Solution Description
-We are going to use the A* algortihm. This algorithm uses what is known as a "heuristic function". This function returns a number that represents a characteristic of the board. We can use many heuristic functions and each one of them is getting us a different response
-The heuristic functions that we are going to use on this experiments are: 
+The algorithm used is A* algortihm. This algorithm uses what is known as a "heuristic function". This function returns a number that represents a characteristic of the board. It can use many heuristic functions and each one of them gives a different response.
+The heuristic functions that  are going to be used on this experiments are: 
 hˆ1(n) = The number of tiles of the board out of place 
 hˆ2(n) = The sum of the Manhattan distance from a piece in the initial state to the same piece in the goal state for all the pieces.
 hˆ3(n) = The sum of inverse permutations 
@@ -13,10 +13,9 @@ python N-puzzle.py inside the directory of the file. Then introduce the size of 
 
 
 ## EXPERIMENTS
-On the part of experiments first we are taking one combination 
-and we are solving it with all the heuristic functions to 
-compare the time that takes to every function. At the bottom we 
-are calculating the average of every function.
+In the experiments part, first a combination is taken and solved with all heuristic functions for 
+is solved with all the heuristic functions to compare the time it takes 
+compare the time taken by each function. In the background the average of each function is calculated.
   || H1 | H2 | H3 |  
  :---: | :---: | :---: | :---:  
  ||  32.86 seconds | 0.571 seconds | 37.68 seconds
@@ -26,21 +25,17 @@ are calculating the average of every function.
  || 27.2313 seconds | 0.52262 seconds | 36.75 seconds
  |Average| 30.14 seconds | 0.78 seconds |36.34 seconds
 
-On the second part of experiments we are taking more 
-combinations and we are comparing the time and the memory that 
-every function has. We are processing the combinations through
-levels so that the first one should be the easiest and the last
-one the hardest to solve.
+In the second part of the experiments, more combinations are taken and the time and memory combinations are taken and the time and memory that each function has is compared. The combinations are processed through
+levels so that the first one is the easiest and the last one the easiest. 
+last one the most difficult to solve
 
-
-# Tiles out of place
-Tiles out of place. For this heuristic we are counting the
-spaces in the board that are out place by comparing the actual
-state with the goal state and then we get the sum of every
-one that is not in place, after that we compare the sums and 
-decide which one is the lowest, once we get it we expand 
-that node and so on. If two states match at the sum of the
-out of place tiles we select one randomly.
+# Out-of-place tiles
+Out-of-place tiles. For this heuristic, the spaces on the board that are out of place are counted by comparing the state
+actual state with the goal state and then the sum of each out-of-place tile is obtained.
+that is out of place, then we compare the sums and decide which is 
+the sums and decide which one is the lowest, once it is obtained we expand that node and so on.
+that node and so on. If two states coincide in the sum of the out-of-place tokens, one of them is selected
+If two states coincide in the sum of the out of place tokens, one is selected at random.
 
 ||Initial State | Time (seconds) | Memory (MB)
 |:---: | :---: | :---: | :---:
@@ -51,11 +46,10 @@ out of place tiles we select one randomly.
 ||6 4 1 0 2 3 8 5 7 | 104.866127729415 | 821.302085876464
 
 # Manhattan Distance
-Manhattan distante. In this heuristic we are comparing the 
-distance between one tile in the actual state and the same 
-tile on the goal state. Once we get the numbers we make a sum 
-of every one. Then we compare the those numbers and expand the 
+In this heuristic a tile in the current state and the same tile in the target state.  Once the numbers are obtained, a sum of each is performed. 
+of each one. Then, those numbers are compared and the lowest one is expanded. 
 lowest one.
+
 ||Initial State | Time (seconds) | Memory (MB)
 |:---: | :---: | :---: | :---:
 ||0 2 3 1 4 5 6 7 8 | 0.0339031219482421 | 0.114471435546875
@@ -65,13 +59,8 @@ lowest one.
 ||6 4 1 0 2 3 8 5 7 | 1.27330470085144 | 5.37344360351562
 
 # Sum of Inverse Permutations
- Inverse permutations. For this heuristic we have the actual 
- combination on a list and going through every element we 
- compare it to the ones ahead and if the element ahead is 
- lower we add it to the a counter. Then we repeat the comparing 
- process with all the elements of the list and after that we 
- make a sum with all the counters. Then we get the number and 
- choose the lowest one and that is the node we expand.
+ Inverse Permutations. For this heuristic the current combination is taken in a list and going through each element it is compared with the elements in front, if the element in front is lower, it is added to the counter. Then the comparison process is repeated  with all the elements of the list and then a sum is performed with all the counters.  Then the number is obtained and 
+ the lowest one is chosen and that is the node to be expanded.
 ||Initial State | Time (seconds) | Memory (MB)
 |:---: | :---: | :---: | :---:
 ||0 2 3 1 4 5 6 7 8 | 1.00835633277893 | 6.0256118774414
