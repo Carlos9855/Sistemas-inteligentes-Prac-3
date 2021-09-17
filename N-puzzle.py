@@ -79,13 +79,13 @@ def getSequenceInfo(dim, grid):
     target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
     nodeSize = sys.getsizeof(grid)
     initialTime = time.time()
-    current = (poroto(dim, grid, target), 0, [], grid)
+    current = (tiles_out_of_place(dim, grid, target), 0, [], grid)
     stateTree = [current]
     heapify(stateTree)
     while(not current [-1] == target):
         current = heappop(stateTree)
         for state in getNextStates(dim, current [-1]):
-            heappush(stateTree, (poroto(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
+            heappush(stateTree, (tiles_out_of_place(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
             count += 1
     finalTime = time.time()
     print("Total search time elapsed : " + str(finalTime - initialTime)+" seconds")
@@ -131,6 +131,24 @@ def getSequenceInfo3(dim, grid):
     print ("Use of memory : "+ str(((nodeSize* count)/1024)/1024)+" MB")
     return current[1], current[2]
 
+def getSequenceInfoPoroto(dim, grid):
+    count = -1
+    target = [[j for j in range(i, i + dim)] for i in range(0, (dim * (dim - 1)) + 1, dim)]
+    nodeSize = sys.getsizeof(grid)
+    initialTime = time.time()
+    current = (poroto(dim, grid, target), 0, [], grid)
+    stateTree = [current]
+    heapify(stateTree)
+    while(not current [-1] == target):
+        current = heappop(stateTree)
+        for state in getNextStates(dim, current [-1]):
+            heappush(stateTree, (poroto(dim, state[1], target) + current[1] + 1, current[1] + 1, current[2] + [state[0]], state[1]))
+            count += 1
+    finalTime = time.time()
+    print("Total search time elapsed :" + str(finalTime - initialTime)+" seconds")
+    print ("Number of nodes :" + str(count))
+    print ("Use of memory : "+ str(((nodeSize* count)/1024)/1024)+" MB")
+    return current[1], current[2]
 
 if (__name__ == '__main__'):
     print("Enter the size of the puzzle: ")
@@ -151,29 +169,32 @@ if (__name__ == '__main__'):
         print("2. Use the Manhattan distance")
         print("3. Use the sum of inverse permutations")
         print("4. Use all the heuristics")
+        print("5. Poroto")
         option = input()
         if option == '1':
             print("- Tiles out of place -")
             seqCount, sequence = getSequenceInfo (dim, grid)
-            print (seqCount)
-            print()
+            print ("Step: "+ str(seqCount))
         if option == '2':
             print("- Manhattan Distance -")
             seqCount, sequence = getSequenceInfo2 (dim, grid)
-            print (seqCount)
-            print()
+            print ("Step: "+ str(seqCount))
         if option == '3':
             print("- Sum of inverse permutations - ")
             seqCount, sequence = getSequenceInfo3 (dim, grid)
-            print (seqCount)
-            print()
+            print ("Step: "+ str(seqCount))
         if option == '4':
             print("- Tiles out of place -")
             seqCount, sequence = getSequenceInfo (dim, grid)
-            print (seqCount)
+            print ("Step: "+ str(seqCount))
             print("- Manhattan Distance -")
             seqCount, sequence = getSequenceInfo2 (dim, grid)
-            print (seqCount)
+            print ("Step: "+ str(seqCount))
             print("- Sum of inverse permutations - ")
             seqCount, sequence = getSequenceInfo3 (dim, grid)
             print ("Step: "+ str(seqCount))
+        if option == '5':
+            print("- Poroto - ")
+            seqCount, sequence = getSequenceInfoPoroto(dim, grid)
+            print ("Step: "+ str(seqCount))
+
